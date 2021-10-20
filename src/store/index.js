@@ -275,11 +275,12 @@ export default new Vuex.Store({
     deleteRecords(context, payload) {
       axios({
         url: `http://localhost:3000/user-activities/${payload.id}`,
-        method: "PATCH",
+        method: "DELETE",
         headers: { access_token: localStorage.getItem("access_token") },
       })
         .then(() => {
           console.log(`A record has been deleted`);
+          context.dispatch("fetchRecords")
         })
         .catch((err) => {
           console.log(err);

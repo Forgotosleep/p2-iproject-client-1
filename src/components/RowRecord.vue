@@ -9,7 +9,7 @@
     <td>
       <!-- Insert Buttons Here -->
       <a href="#" @click="completeRecord">Complete</a> |
-      <a href="#">Delete</a> |
+      <a href="#" @click="deleteRecord">Delete</a> |
       <a href="#">Add to Google Calendar</a>
     </td>
   </tr>
@@ -21,10 +21,12 @@ export default {
   props: ["record"],
   methods: {
     completeRecord() {
-      this.$store.dispatch("patchRecords", {id: this.record.id})
-    }
-  }
-
+      this.$store.dispatch("patchRecords", { id: this.record.id });
+    },
+    deleteRecord() {
+      this.$store.dispatch("deleteRecords", { id: this.record.id });
+    },
+  },
 };
 </script>
 
