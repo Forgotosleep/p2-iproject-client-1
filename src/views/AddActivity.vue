@@ -1,42 +1,33 @@
 <template>
   <div class="container">
-    <form>
+    <form @submit.prevent="submitNewActivity">
       <div class="form-group">
-        <label for="exampleFormControlInput1">Email address</label>
+        <label for="exampleFormControlInput1">Activity Name</label>
         <input
-          type="email"
+          type="text"
           class="form-control"
           id="exampleFormControlInput1"
-          placeholder="name@example.com"
+          placeholder="Activity Name"
+          v-model="title"
         />
       </div>
+
       <div class="form-group">
-        <label for="exampleFormControlSelect1">Example select</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlSelect2">Example multiple select</label>
-        <select multiple class="form-control" id="exampleFormControlSelect2">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1">Example textarea</label>
+        <label for="exampleFormControlTextarea1">Activity Description</label>
         <textarea
           class="form-control"
           id="exampleFormControlTextarea1"
           rows="3"
+          placeholder="Activity Description"
+          v-model="description"
         ></textarea>
+      </div>
+
+      <div>
+        <input
+          type="submit"
+          value="Submit Activity"
+        />
       </div>
     </form>
   </div>
@@ -44,7 +35,23 @@
 
 <script>
 export default {
-  name: "AddActivity"
+  name: "AddActivity",
+  data() {
+    return {
+      title: "",
+      description: "",
+    };
+  },
+  methods: {
+    submitNewActivity() {
+      const payload = {
+        title: this.title,
+        description: this.description,
+      };
+
+      this.$store.dispatch("addActivity", payload);
+    },
+  },
 };
 </script>
 

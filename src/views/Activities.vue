@@ -48,6 +48,14 @@ export default {
       });
     },
   },
+    methods: {
+    fetchActivities() {
+      this.$store.dispatch("fetchActivities");
+    },
+  },
+  created() {
+    this.fetchActivities();
+  },
 };
 </script>
 
