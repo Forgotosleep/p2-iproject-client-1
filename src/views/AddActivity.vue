@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <h1>This is the Add Activity page</h1>
+
     <form @submit.prevent="submitNewActivity">
       <div class="form-group">
         <label for="exampleFormControlInput1">Activity Name</label>

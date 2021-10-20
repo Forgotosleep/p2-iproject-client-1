@@ -4,6 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/activities">My Activities</router-link> |
       <router-link to="/add-activity">Add Activity</router-link> |
+      <router-link to="/add-record">Add Record</router-link> |
       <router-link to="/login">Login</router-link> |
       <router-link to="/register">Register</router-link> |
       <router-link to="/test">Testing Grounds</router-link> |

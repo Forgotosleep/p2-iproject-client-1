@@ -11,6 +11,7 @@ export default new Vuex.Store({
     isLoggedIn: false,
     activity: {},
     activities: [],
+    record: {},
     records: [],
     params: {
       // First one is Blogger's, second one is iDid's
@@ -202,7 +203,7 @@ export default new Vuex.Store({
           );
         });
     },
-    addRecords(context, payload) {
+    addRecord(context, payload) {
       axios({
         url: `http://localhost:3000/user-activities/`,
         method: "POST",
@@ -211,6 +212,7 @@ export default new Vuex.Store({
       })
         .then(() => {
           console.log(`A new record has been added`);
+          router.push("/")
         })
         .catch((err) => {
           console.log(err);
