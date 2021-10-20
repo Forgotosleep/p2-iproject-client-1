@@ -114,7 +114,29 @@ export default new Vuex.Store({
           );
         });
     },
-
+    patchRecords(context, payload) {
+      axios({
+        url: `http://localhost:3000/user-activities/${payload.id}`,
+        method: "PATCH",
+        headers: { access_token: localStorage.getItem("access_token") },
+        data: { status: "complete" }
+      })
+        .then(() => {
+          console.log(`Record status has been updated`);          
+        })
+        .catch((err) => {
+          console.log(err);
+          swal(
+            `${err.response.status} ${err.response.statusText}`,
+            `${
+              typeof err.response.data.message === "string"
+                ? err.response.data.message
+                : err.response.data.message.toString().split(",").join(", ")
+            }`,
+            "error"
+          );
+        });
+    },
   },
   modules: {},
 });

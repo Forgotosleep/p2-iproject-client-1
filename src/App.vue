@@ -2,15 +2,32 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
+      <router-link to="/activities">My Activities</router-link> |
       <router-link to="/login">Login</router-link> |
       <router-link to="/register">Register</router-link> |
+      <a href="#" @click="logout"> Logout </a>
     </div>
     <router-view />
   </div>
 </template>
 
+<script>
+export default {
+  name: "App",
+  methods: {
+    // toHome() {
+    //   this.$router.push("/");
+    // },
+    logout() {
+      localStorage.removeItem("access_token");
+      this.$router.push("/login");
+    },
+  },
+};
+</script>
+
 <style>
-  /* body {
+/* body {
     background-color: black;
   } */
 
