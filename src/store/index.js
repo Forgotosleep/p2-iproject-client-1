@@ -9,6 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isLoggedIn: false,
+    activity: {},
     activities: [],
     records: [],
     params: {
@@ -34,6 +35,9 @@ export default new Vuex.Store({
     FETCH_RECORDS(state, payload) {
       state.records = payload.data;
     },
+    TARGET_ACTIVITY(state, payload) {
+      state.activity = payload
+    }
   },
   actions: {
     // LOGIN-REGISTER
@@ -138,6 +142,7 @@ export default new Vuex.Store({
       })
         .then(() => {
           console.log("An Activity has been edited!");
+          router.push("/activities")
         })
         .catch((err) => {
           console.log(err);
@@ -160,6 +165,7 @@ export default new Vuex.Store({
       })
         .then(() => {
           console.log("An Activity has been deleted!");
+          context.dispatch("fetchActivities")
         })
         .catch((err) => {
           console.log(err);

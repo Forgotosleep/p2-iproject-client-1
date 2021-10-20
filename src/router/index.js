@@ -5,6 +5,7 @@ import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 import Activities from "../views/Activities.vue";
 import AddActivity from "../views/AddActivity.vue";
+import EditActivity from "../views/EditActivity.vue";
 import Test from "../views/Test.vue";
 
 Vue.use(VueRouter);
@@ -34,6 +35,11 @@ const routes = [
     path: "/add-activity",
     name: "AddActivity",
     component: AddActivity,
+  },
+  {
+    path: "/edit-activity",
+    name: "EditActivity",
+    component: EditActivity,
   },
   {
     path: "/test",
