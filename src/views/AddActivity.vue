@@ -14,6 +14,8 @@
         />
       </div>
 
+      <br />
+
       <div class="form-group">
         <label for="exampleFormControlTextarea1">Activity Description</label>
         <textarea
@@ -24,12 +26,11 @@
           v-model="description"
         ></textarea>
       </div>
+      
+      <br />
 
       <div>
-        <input
-          type="submit"
-          value="Submit Activity"
-        />
+        <input type="submit" value="Submit Activity" />
       </div>
     </form>
   </div>

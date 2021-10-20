@@ -8,9 +8,9 @@
     <td>{{ record.updatedAt }}</td>
     <td>
       <!-- Insert Buttons Here -->
-      <button>A</button>
-      <button>B</button>
-      <button>C</button>
+      <a href="#" @click="completeRecord">Complete</a> |
+      <a href="#">Delete</a> |
+      <a href="#">Add to Google Calendar</a>
     </td>
   </tr>
 </template>
@@ -19,9 +19,11 @@
 export default {
   name: "RowRecord",
   props: ["record"],
-  data() {
-    return {};
-  },
+  methods: {
+    completeRecord() {
+      this.$store.dispatch("patchRecords", {id: this.record.id})
+    }
+  }
 
 };
 </script>

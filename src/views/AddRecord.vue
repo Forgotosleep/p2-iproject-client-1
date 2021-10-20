@@ -16,6 +16,8 @@
 
         </select>
       </div>
+      
+      <br />
 
       <div>
         <input type="submit" value="Add new Record" />

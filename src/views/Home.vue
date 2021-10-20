@@ -12,9 +12,9 @@
             <th>#</th>
             <th>Activity Name</th>
             <th>Description</th>
+            <th>Status</th>
             <th>Created Date</th>
             <th>Updated Date</th>
-            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -22,7 +22,7 @@
         <tbody>
           <RowRecord
             v-for="record in records"
-            :key="record.id"
+            :key="record.updatedAt"
             :record="record"
           />
 
@@ -52,23 +52,6 @@ export default {
       return this.$store.state.activities;
     },
     records() {
-      // return this.$store.state.records;
-
-      // const records = this.$store.state.records.map((record, index) => {
-      //   if (record.status !== "hidden") {
-      //     return {
-      //       number: index + 1,
-      //       id: record.id,
-      //       recordName: record.Activity.title,
-      //       recordDescription: record.Activity.description,
-      //       recordStatus: record.status,
-      //       createdAt: record.createdAt,
-      //       updatedAt: record.updatedAt,
-      //     };
-      //   }
-      //   return "";
-      // });
-
       let records = this.$store.state.records
         .filter((record) => record.status !== "hidden")
         .map((record, index) => {

@@ -226,7 +226,7 @@ export default new Vuex.Store({
           );
         });
     },
-    editRecords(context, payload) {
+    editRecords(context, payload) {  // Depreciated. More intuitive to delete, then add a new activity.
       axios({
         url: `http://localhost:3000/user-activities/${payload.id}`,
         method: "PUT",
@@ -251,13 +251,13 @@ export default new Vuex.Store({
 
     patchRecords(context, payload) {
       axios({
-        url: `http://localhost:3000/user-activities/${payload.id}`,
+        url: `http://localhost:3000/user-activities/${payload.id}?status=complete`,
         method: "PATCH",
         headers: { access_token: localStorage.getItem("access_token") },
-        data: { status: "complete" },
       })
         .then(() => {
           console.log(`Record status has been updated`);
+          context.dispatch("fetchRecords")
         })
         .catch((err) => {
           console.log(err);

@@ -8,10 +8,10 @@
       <router-link to="/login">Login</router-link> |
       <router-link to="/register">Register</router-link> |
       <router-link to="/test">Testing Grounds</router-link> |
-      <a href="#" @click="logout"> Logout </a>
-      <GoogleLogin :params="params" :logoutButton="true" @click="logout"
+      <a href="#" @click="logout"><GoogleLogin :params="params" :logoutButton="true" @click="logout"
         >Logout</GoogleLogin
-      >
+      ></a>
+      
     </div>
     <router-view />
   </div>

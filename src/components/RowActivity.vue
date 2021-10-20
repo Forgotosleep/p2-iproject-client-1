@@ -9,6 +9,7 @@
         @click="targetActivity"
         >Edit</a
       >
+       |
       <a href="#" @click="deleteActivity">
         Delete
       </a>
