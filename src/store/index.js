@@ -9,10 +9,18 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isLoggedIn: false,
+    activities: [],
+    records: []
   },
   mutations: {
     CHANGE_LOGIN_STATUS(state, payload) {
       state.isLoggedIn = payload;
+    },
+    FETCH_ACTIVITIES(state, payload) {
+      state.activities = payload.data;
+    },
+    FETCH_RECORDS(state, payload) {
+      state.records = payload.data;
     },
   },
   actions: {
@@ -62,6 +70,51 @@ export default new Vuex.Store({
           );
         });
     },
+    fetchActivities(context) {
+      axios({
+        url: `http://localhost:3000/activities`,
+        method: "GET",
+        headers: { access_token: localStorage.getItem("access_token") },
+      })
+        .then((response) => {
+          context.commit("FETCH_ACTIVITIES", response);
+        })
+        .catch((err) => {
+          console.log(err);
+          swal(
+            `${err.response.status} ${err.response.statusText}`,
+            `${
+              typeof err.response.data.message === "string"
+                ? err.response.data.message
+                : err.response.data.message.toString().split(",").join(", ")
+            }`,
+            "error"
+          );
+        });
+    },
+    fetchRecords(context) {
+      axios({
+        url: `http://localhost:3000/user-activities`,
+        method: "GET",
+        headers: { access_token: localStorage.getItem("access_token") },
+      })
+        .then((response) => {
+          context.commit("FETCH_RECORDS", response);
+        })
+        .catch((err) => {
+          console.log(err);
+          swal(
+            `${err.response.status} ${err.response.statusText}`,
+            `${
+              typeof err.response.data.message === "string"
+                ? err.response.data.message
+                : err.response.data.message.toString().split(",").join(", ")
+            }`,
+            "error"
+          );
+        });
+    },
+
   },
   modules: {},
 });
