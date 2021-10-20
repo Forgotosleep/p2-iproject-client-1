@@ -10,7 +10,18 @@ export default new Vuex.Store({
   state: {
     isLoggedIn: false,
     activities: [],
-    records: []
+    records: [],
+    params: {
+      client_id:  // First one is Blogger's, second one is iDid's
+        // "1041028257227-f7k06539fauhoeohb7l67fubcsou0pnd.apps.googleusercontent.com",  
+        "526869245640-evqtu4oc9qf9e2mhdh86tmeqgl6bth86.apps.googleusercontent.com"
+    },
+    // only needed if you want to render the button with the google ui
+    renderParams: {
+      width: 250,
+      height: 50,
+      longtitle: true,
+    }
   },
   mutations: {
     CHANGE_LOGIN_STATUS(state, payload) {
@@ -24,6 +35,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    // LOGIN-REGISTER
     login(context, payload) {
       axios({
         url: `http://localhost:3000/users/login`,
@@ -39,10 +51,9 @@ export default new Vuex.Store({
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${
-              typeof err.response.data.message === "string"
-                ? err.response.data.message
-                : err.response.data.message.toString().split(",").join(", ")
+            `${typeof err.response.data.message === "string"
+              ? err.response.data.message
+              : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );
@@ -61,15 +72,16 @@ export default new Vuex.Store({
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${
-              typeof err.response.data.message === "string"
-                ? err.response.data.message
-                : err.response.data.message.toString().split(",").join(", ")
+            `${typeof err.response.data.message === "string"
+              ? err.response.data.message
+              : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );
         });
     },
+
+    // ACTIVITIES
     fetchActivities(context) {
       axios({
         url: `http://localhost:3000/activities`,
@@ -83,15 +95,84 @@ export default new Vuex.Store({
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${
-              typeof err.response.data.message === "string"
-                ? err.response.data.message
-                : err.response.data.message.toString().split(",").join(", ")
+            `${typeof err.response.data.message === "string"
+              ? err.response.data.message
+              : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );
         });
     },
+    addActivity(context, payload) {
+      axios({
+        url: `http://localhost:3000/activities`,
+        method: "POST",
+        headers: { access_token: localStorage.getItem("access_token") },
+        data: payload
+      })
+        .then(() => {
+          console.log("New Activity has been added!");
+        })
+        .catch((err) => {
+          console.log(err);
+          swal(
+            `${err.response.status} ${err.response.statusText}`,
+            `${typeof err.response.data.message === "string"
+              ? err.response.data.message
+              : err.response.data.message.toString().split(",").join(", ")
+            }`,
+            "error"
+          );
+        });
+    },
+
+    editActivity(context, payload) {
+      axios({
+        url: `http://localhost:3000/activities/${payload.id}`,
+        method: "POST",
+        headers: { access_token: localStorage.getItem("access_token") },
+        data: payload
+      })
+        .then(() => {
+          console.log("An Activity has been edited!");
+        })
+        .catch((err) => {
+          console.log(err);
+          swal(
+            `${err.response.status} ${err.response.statusText}`,
+            `${typeof err.response.data.message === "string"
+              ? err.response.data.message
+              : err.response.data.message.toString().split(",").join(", ")
+            }`,
+            "error"
+          );
+        });
+    },
+
+    deleteActivity(context, payload) {
+      axios({
+        url: `http://localhost:3000/activities/${payload.id}`,
+        method: "POST",
+        headers: { access_token: localStorage.getItem("access_token") },
+        data: payload
+      })
+        .then(() => {
+          console.log("An Activity has been deleted!");
+        })
+        .catch((err) => {
+          console.log(err);
+          swal(
+            `${err.response.status} ${err.response.statusText}`,
+            `${typeof err.response.data.message === "string"
+              ? err.response.data.message
+              : err.response.data.message.toString().split(",").join(", ")
+            }`,
+            "error"
+          );
+        });
+    },
+
+    // RECORDS
     fetchRecords(context) {
       axios({
         url: `http://localhost:3000/user-activities`,
@@ -105,10 +186,9 @@ export default new Vuex.Store({
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${
-              typeof err.response.data.message === "string"
-                ? err.response.data.message
-                : err.response.data.message.toString().split(",").join(", ")
+            `${typeof err.response.data.message === "string"
+              ? err.response.data.message
+              : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );
@@ -122,16 +202,15 @@ export default new Vuex.Store({
         data: { status: "complete" }
       })
         .then(() => {
-          console.log(`Record status has been updated`);          
+          console.log(`Record status has been updated`);
         })
         .catch((err) => {
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${
-              typeof err.response.data.message === "string"
-                ? err.response.data.message
-                : err.response.data.message.toString().split(",").join(", ")
+            `${typeof err.response.data.message === "string"
+              ? err.response.data.message
+              : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );

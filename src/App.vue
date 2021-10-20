@@ -5,20 +5,33 @@
       <router-link to="/activities">My Activities</router-link> |
       <router-link to="/login">Login</router-link> |
       <router-link to="/register">Register</router-link> |
+      <router-link to="/test">Testing Grounds</router-link> |
       <a href="#" @click="logout"> Logout </a>
+      <GoogleLogin :params="params" :logoutButton=true @click="logout">Logout</GoogleLogin>
     </div>
     <router-view />
   </div>
 </template>
 
 <script>
+import GoogleLogin from "vue-google-login";
+
 export default {
   name: "App",
+  components: {
+    GoogleLogin
+  },
+  computed: {
+    params() {
+      return this.$store.state.params
+    }
+  },
   methods: {
     // toHome() {
     //   this.$router.push("/");
     // },
     logout() {
+      console.log("CLICK!");  // Not working for google logout for some reason
       localStorage.removeItem("access_token");
       this.$router.push("/login");
     },

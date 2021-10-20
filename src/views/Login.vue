@@ -38,6 +38,17 @@
                   />
                 </div>
                 <hr class="my-4" />
+                <div class="row justify-content-center">
+                  <div class="d-grid container">
+                    <GoogleLogin
+                      :params="params"
+                      :renderParams="renderParams"
+                      @click="click"
+                      @onSuccess="onSuccess"
+                      @onFailure="onFailure"
+                    ></GoogleLogin>
+                  </div>
+                </div>
               </form>
             </div>
           </div>
@@ -48,8 +59,23 @@
 </template>
 
 <script>
+import GoogleLogin from "vue-google-login";
+import axios from "axios";
+import swal from "sweetalert";
+
 export default {
   name: "Login",
+  components: {
+    GoogleLogin,
+  },
+  computed: {
+    params() {
+      return this.$store.state.params;
+    },
+    renderParams() {
+      return this.$store.state.renderParams;
+    },
+  },
   data() {
     return {
       email: "",
@@ -57,11 +83,44 @@ export default {
     };
   },
   methods: {
+    click() {
+      console.log("CLICK!");
+    },
     login() {
       this.$store.dispatch("login", {
         email: this.email,
         password: this.password,
       });
+    },
+    onSuccess(googleUser) {
+      //The google logs in, but it doesn't work. There's no access token generated.
+      // GOOGLE LOGIN
+      console.log(googleUser, "<<<< GOOGLE USER"); // For testing purpoises
+      console.log("HEREEE");
+      // console.log(googleUser["$b"].id_token, '<<<< GOOGLE USER ID TOKEN'); // For testing purpoises
+
+      const id_token = googleUser["$b"].id_token;
+
+      axios({
+        url: `http://localhost:3000/users/login-google`,
+        method: "POST",
+        data: {
+          idToken: id_token,
+        },
+      })
+        .then((result) => {
+          localStorage.setItem("access_token", result.data.access_token);
+          this.$store.commit("CHANGE_LOGIN_STATUS", true);
+          this.$router.push("/");
+        })
+        .catch((err) => {
+          swal(err.response);
+        });
+    },
+    onFailure() {
+      // GOOGLE LOGIN
+      // console.log(payload.err);
+      swal("Failed to login", "Error");
     },
   },
 };

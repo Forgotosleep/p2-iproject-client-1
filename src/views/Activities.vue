@@ -2,9 +2,9 @@
   <div>
     <h1>This is the Activities page</h1>
 
-    <div class="container">
+    <!-- <div class="container">
       <b-table striped hover :items="activities"></b-table>
-    </div>
+    </div> -->
 
     <div class="container">
       <table class="table table-striped">
@@ -13,25 +13,16 @@
             <th>Number</th>
             <th>Activity Name</th>
             <th>Description</th>
+            <th>Action</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>3</td>
-            <td>3</td>
-          </tr>
+          <RowActivity
+            v-for="activity in activities"
+            :key="activity.number"
+            :activity="activity"
+          />
         </tbody>
       </table>
     </div>
@@ -39,15 +30,24 @@
 </template>
 
 <script>
+import RowActivity from "../components/RowActivity.vue";
 export default {
+  components: { RowActivity },
   name: "Activities",
   computed: {
     activities() {
-      return this.$store.state.activities;
+      // return this.$store.state.activities;
+
+      return this.$store.state.activities.map((activity, index) => {
+        return {
+          id: activity.id,
+          number: index + 1,
+          name: activity.title,
+          description: activity.description,
+        };
+      });
     },
   },
-
-  
 };
 </script>
 

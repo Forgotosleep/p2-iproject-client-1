@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 import Activities from "../views/Activities.vue";
+import Test from "../views/Test.vue";
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,11 @@ const routes = [
     name: "Activities",
     component: Activities,
   },
+  {
+    path: "/test",
+    name: "Test",
+    component: Test,
+  },
 ];
 
 const router = new VueRouter({
@@ -39,6 +45,8 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const access_token = localStorage.getItem("access_token");
   if (to.name === "Home" && !access_token) {
+    next({ name: "Login" });
+  } else if (to.name === "Activities" && !access_token) {
     next({ name: "Login" });
   } else if (to.name === "Login" && access_token) {
     next({ name: "Home" });

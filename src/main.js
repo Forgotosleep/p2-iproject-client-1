@@ -3,6 +3,10 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import AddToCalendar from 'vue-add-to-calendar'
+
+// var AddToCalendar = require('vue-add-to-calendar');
+Vue.use(AddToCalendar);
 
 // VUE-BOOTSTRAP
 Vue.use(BootstrapVue)
