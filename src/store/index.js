@@ -38,6 +38,9 @@ export default new Vuex.Store({
     },
     TARGET_ACTIVITY(state, payload) {
       state.activity = payload
+    },
+    TARGET_RECORD(state, payload) {
+      state.record = payload
     }
   },
   actions: {

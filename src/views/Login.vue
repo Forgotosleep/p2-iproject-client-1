@@ -40,13 +40,17 @@
                 <hr class="my-4" />
                 <div class="row justify-content-center">
                   <div class="d-grid container">
-                    <GoogleLogin
-                      :params="params"
-                      :renderParams="renderParams"
+                    <a
+                      href="#"
                       @click="click"
                       @onSuccess="onSuccess"
                       @onFailure="onFailure"
-                    ></GoogleLogin>
+                    >
+                      <GoogleLogin
+                        :params="params"
+                        :renderParams="renderParams"
+                      ></GoogleLogin>
+                    </a>
                   </div>
                 </div>
               </form>

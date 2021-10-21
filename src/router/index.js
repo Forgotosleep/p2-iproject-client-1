@@ -66,6 +66,12 @@ router.beforeEach((to, from, next) => {
     next({ name: "Login" });
   } else if (to.name === "Activities" && !access_token) {
     next({ name: "Login" });
+  } else if (to.name === "AddActivity" && !access_token) {
+    next({ name: "Login" });
+  } else if (to.name === "EditActivity" && !access_token) {
+    next({ name: "Login" });
+  } else if (to.name === "AddRecord" && !access_token) {
+    next({ name: "Login" });
   } else if (to.name === "Login" && access_token) {
     next({ name: "Home" });
   } else if (to.name === "Register" && access_token) {

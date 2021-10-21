@@ -26,7 +26,7 @@
             :record="record"
           />
 
-          <tr>
+          <!-- <tr>
             <td></td>
             <td>Test</td>
             <td>Test</td>
@@ -34,7 +34,7 @@
             <td>10-10-10</td>
             <td>completed</td>
             <td>complete delete add2G-Calendar</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
