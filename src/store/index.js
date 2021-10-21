@@ -8,7 +8,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    baseUrl: "http://localhost:3000",
+    // baseUrl: "http://localhost:3000",  // for Local
+    baseUrl: "https://brian-idid.herokuapp.com",  // for Deployment
     isLoggedIn: false,
     activity: {},
     activities: [],
