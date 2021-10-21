@@ -4,8 +4,12 @@
     <form @submit.prevent="submitNewRecord">
       <div class="form-group">
         <label for="exampleFormControlSelect1">Activities: </label>
-        <select class="form-control" id="exampleFormControlSelect1" v-model="ActivityId">
-          <option value="0" disabled selected>-- Select an activity -- </option>
+        <select
+          class="form-control"
+          id="exampleFormControlSelect1"
+          v-model="ActivityId"
+        >
+          <option value="0" disabled selected>-- Select an activity --</option>
           <option
             v-for="activity in activities"
             :key="activity.id"
@@ -13,10 +17,9 @@
           >
             {{ activity.title }}
           </option>
-
         </select>
       </div>
-      
+
       <br />
 
       <div>
@@ -27,7 +30,6 @@
 </template>
 
 <script>
-
 export default {
   name: "AddRecord",
   data() {
@@ -35,8 +37,7 @@ export default {
       ActivityId: 0,
     };
   },
-  components: {
-  },
+  components: {},
   computed: {
     activities() {
       return this.$store.state.activities;
@@ -45,7 +46,7 @@ export default {
   methods: {
     submitNewRecord() {
       const payload = {
-        ActivityId: this.ActivityId
+        ActivityId: this.ActivityId,
       };
       this.$store.dispatch("addRecord", payload);
     },
@@ -53,7 +54,7 @@ export default {
       this.$store.dispatch("fetchActivities");
     },
   },
-    created() {
+  created() {
     this.fetchActivities();
   },
 };

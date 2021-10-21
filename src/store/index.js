@@ -8,15 +8,14 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    baseUrl: "http://localhost:3000",
     isLoggedIn: false,
     activity: {},
     activities: [],
     record: {},
     records: [],
     params: {
-      // First one is Blogger's, second one is iDid's
       client_id:
-        // "1041028257227-f7k06539fauhoeohb7l67fubcsou0pnd.apps.googleusercontent.com",
         "526869245640-evqtu4oc9qf9e2mhdh86tmeqgl6bth86.apps.googleusercontent.com",
     },
     // only needed if you want to render the button with the google ui
@@ -37,17 +36,17 @@ export default new Vuex.Store({
       state.records = payload.data;
     },
     TARGET_ACTIVITY(state, payload) {
-      state.activity = payload
+      state.activity = payload;
     },
     TARGET_RECORD(state, payload) {
-      state.record = payload
-    }
+      state.record = payload;
+    },
   },
   actions: {
     // LOGIN-REGISTER
     login(context, payload) {
       axios({
-        url: `http://localhost:3000/users/login`,
+        url: `${context.state.baseUrl}/users/login`,
         method: "POST",
         data: payload,
       })
@@ -60,9 +59,10 @@ export default new Vuex.Store({
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${typeof err.response.data.message === "string"
-              ? err.response.data.message
-              : err.response.data.message.toString().split(",").join(", ")
+            `${
+              typeof err.response.data.message === "string"
+                ? err.response.data.message
+                : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );
@@ -70,7 +70,7 @@ export default new Vuex.Store({
     },
     register(context, payload) {
       axios({
-        url: `http://localhost:3000/users/register`,
+        url: `${context.state.baseUrl}/users/register`,
         method: "POST",
         data: payload,
       })
@@ -81,9 +81,10 @@ export default new Vuex.Store({
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${typeof err.response.data.message === "string"
-              ? err.response.data.message
-              : err.response.data.message.toString().split(",").join(", ")
+            `${
+              typeof err.response.data.message === "string"
+                ? err.response.data.message
+                : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );
@@ -93,7 +94,7 @@ export default new Vuex.Store({
     // ACTIVITIES
     fetchActivities(context) {
       axios({
-        url: `http://localhost:3000/activities`,
+        url: `${context.state.baseUrl}/activities`,
         method: "GET",
         headers: { access_token: localStorage.getItem("access_token") },
       })
@@ -104,9 +105,10 @@ export default new Vuex.Store({
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${typeof err.response.data.message === "string"
-              ? err.response.data.message
-              : err.response.data.message.toString().split(",").join(", ")
+            `${
+              typeof err.response.data.message === "string"
+                ? err.response.data.message
+                : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );
@@ -114,7 +116,7 @@ export default new Vuex.Store({
     },
     addActivity(context, payload) {
       axios({
-        url: `http://localhost:3000/activities`,
+        url: `${context.state.baseUrl}/activities`,
         method: "POST",
         headers: { access_token: localStorage.getItem("access_token") },
         data: payload,
@@ -122,15 +124,15 @@ export default new Vuex.Store({
         .then(() => {
           console.log("New Activity has been added!");
           router.push("/activities");
-
         })
         .catch((err) => {
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${typeof err.response.data.message === "string"
-              ? err.response.data.message
-              : err.response.data.message.toString().split(",").join(", ")
+            `${
+              typeof err.response.data.message === "string"
+                ? err.response.data.message
+                : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );
@@ -139,22 +141,23 @@ export default new Vuex.Store({
 
     editActivity(context, payload) {
       axios({
-        url: `http://localhost:3000/activities/${payload.id}`,
+        url: `${context.state.baseUrl}/activities/${payload.id}`,
         method: "PUT",
         headers: { access_token: localStorage.getItem("access_token") },
         data: payload,
       })
         .then(() => {
           console.log("An Activity has been edited!");
-          router.push("/activities")
+          router.push("/activities");
         })
         .catch((err) => {
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${typeof err.response.data.message === "string"
-              ? err.response.data.message
-              : err.response.data.message.toString().split(",").join(", ")
+            `${
+              typeof err.response.data.message === "string"
+                ? err.response.data.message
+                : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );
@@ -163,21 +166,22 @@ export default new Vuex.Store({
 
     deleteActivity(context, payload) {
       axios({
-        url: `http://localhost:3000/activities/${payload.id}`,
+        url: `${context.state.baseUrl}/activities/${payload.id}`,
         method: "DELETE",
         headers: { access_token: localStorage.getItem("access_token") },
       })
         .then(() => {
           console.log("An Activity has been deleted!");
-          context.dispatch("fetchActivities")
+          context.dispatch("fetchActivities");
         })
         .catch((err) => {
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${typeof err.response.data.message === "string"
-              ? err.response.data.message
-              : err.response.data.message.toString().split(",").join(", ")
+            `${
+              typeof err.response.data.message === "string"
+                ? err.response.data.message
+                : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );
@@ -187,7 +191,7 @@ export default new Vuex.Store({
     // RECORDS
     fetchRecords(context) {
       axios({
-        url: `http://localhost:3000/user-activities`,
+        url: `${context.state.baseUrl}/user-activities`,
         method: "GET",
         headers: { access_token: localStorage.getItem("access_token") },
       })
@@ -198,9 +202,10 @@ export default new Vuex.Store({
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${typeof err.response.data.message === "string"
-              ? err.response.data.message
-              : err.response.data.message.toString().split(",").join(", ")
+            `${
+              typeof err.response.data.message === "string"
+                ? err.response.data.message
+                : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );
@@ -208,30 +213,32 @@ export default new Vuex.Store({
     },
     addRecord(context, payload) {
       axios({
-        url: `http://localhost:3000/user-activities/`,
+        url: `${context.state.baseUrl}/user-activities/`,
         method: "POST",
         headers: { access_token: localStorage.getItem("access_token") },
         data: payload,
       })
         .then(() => {
           console.log(`A new record has been added`);
-          router.push("/")
+          router.push("/");
         })
         .catch((err) => {
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${typeof err.response.data.message === "string"
-              ? err.response.data.message
-              : err.response.data.message.toString().split(",").join(", ")
+            `${
+              typeof err.response.data.message === "string"
+                ? err.response.data.message
+                : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );
         });
     },
-    editRecords(context, payload) {  // Depreciated. More intuitive to delete, then add a new activity.
+    editRecords(context, payload) {
+      // Depreciated. More intuitive to delete, then add a new activity.
       axios({
-        url: `http://localhost:3000/user-activities/${payload.id}`,
+        url: `${context.state.baseUrl}/user-activities/${payload.id}`,
         method: "PUT",
         headers: { access_token: localStorage.getItem("access_token") },
         data: payload,
@@ -243,9 +250,10 @@ export default new Vuex.Store({
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${typeof err.response.data.message === "string"
-              ? err.response.data.message
-              : err.response.data.message.toString().split(",").join(", ")
+            `${
+              typeof err.response.data.message === "string"
+                ? err.response.data.message
+                : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );
@@ -254,21 +262,22 @@ export default new Vuex.Store({
 
     patchRecords(context, payload) {
       axios({
-        url: `http://localhost:3000/user-activities/${payload.id}?status=complete`,
+        url: `${context.state.baseUrl}/user-activities/${payload.id}?status=complete`,
         method: "PATCH",
         headers: { access_token: localStorage.getItem("access_token") },
       })
         .then(() => {
           console.log(`Record status has been updated`);
-          context.dispatch("fetchRecords")
+          context.dispatch("fetchRecords");
         })
         .catch((err) => {
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${typeof err.response.data.message === "string"
-              ? err.response.data.message
-              : err.response.data.message.toString().split(",").join(", ")
+            `${
+              typeof err.response.data.message === "string"
+                ? err.response.data.message
+                : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );
@@ -277,21 +286,22 @@ export default new Vuex.Store({
 
     deleteRecords(context, payload) {
       axios({
-        url: `http://localhost:3000/user-activities/${payload.id}`,
+        url: `${context.state.baseUrl}/user-activities/${payload.id}`,
         method: "DELETE",
         headers: { access_token: localStorage.getItem("access_token") },
       })
         .then(() => {
           console.log(`A record has been deleted`);
-          context.dispatch("fetchRecords")
+          context.dispatch("fetchRecords");
         })
         .catch((err) => {
           console.log(err);
           swal(
             `${err.response.status} ${err.response.statusText}`,
-            `${typeof err.response.data.message === "string"
-              ? err.response.data.message
-              : err.response.data.message.toString().split(",").join(", ")
+            `${
+              typeof err.response.data.message === "string"
+                ? err.response.data.message
+                : err.response.data.message.toString().split(",").join(", ")
             }`,
             "error"
           );

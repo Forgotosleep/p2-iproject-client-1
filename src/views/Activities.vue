@@ -48,7 +48,7 @@ export default {
       });
     },
   },
-    methods: {
+  methods: {
     fetchActivities() {
       this.$store.dispatch("fetchActivities");
     },

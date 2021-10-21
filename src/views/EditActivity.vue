@@ -24,10 +24,7 @@
       </div>
 
       <div>
-        <input
-          type="submit"
-          value="Edit Activity"
-        />
+        <input type="submit" value="Edit Activity" />
       </div>
     </form>
   </div>
@@ -43,7 +40,7 @@ export default {
       description: "",
     };
   },
-  props: ["activity"], 
+  props: ["activity"],
   methods: {
     submitEditActivity() {
       const payload = {
@@ -56,11 +53,10 @@ export default {
     },
   },
   created() {
-    this.id = this.$store.state.activity.id
-    this.title = this.$store.state.activity.name
-    this.description = this.$store.state.activity.description
-  }
-
+    this.id = this.$store.state.activity.id;
+    this.title = this.$store.state.activity.name;
+    this.description = this.$store.state.activity.description;
+  },
 };
 </script>
 

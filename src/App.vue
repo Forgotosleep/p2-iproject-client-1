@@ -1,17 +1,24 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/activities">My Activities</router-link> |
-      <router-link to="/add-activity">Add Activity</router-link> |
-      <router-link to="/add-record">Add Record</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/register">Register</router-link> |
+      <router-link to="/" v-if="isLoggedIn">Home</router-link> |
+      <router-link to="/activities" v-if="isLoggedIn"
+        >My Activities</router-link
+      >
+      |
+      <router-link to="/add-activity" v-if="isLoggedIn"
+        >Add Activity</router-link
+      >
+      |
+      <router-link to="/add-record" v-if="isLoggedIn">Add Record</router-link> |
+      <router-link to="/login" v-if="!isLoggedIn">Login</router-link> |
+      <router-link to="/register" v-if="!isLoggedIn">Register</router-link> |
       <!-- <router-link to="/test">Testing Grounds</router-link> | -->
-      <a href="#" @click="logout"><GoogleLogin :params="params" :logoutButton="true" @click="logout"
-        >Logout</GoogleLogin
-      ></a>
-      
+      <a href="#" @click="logout"
+        ><GoogleLogin :params="params" :logoutButton="true" @click="logout"
+          >Logout</GoogleLogin
+        ></a
+      >
     </div>
     <router-view />
   </div>
@@ -28,6 +35,9 @@ export default {
   computed: {
     params() {
       return this.$store.state.params;
+    },
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn;
     },
   },
   methods: {
