@@ -1,0 +1,52 @@
+{
+  "name": "p2-iproject-client-1",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Individual Project - Client",
+  "author": "",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.23.0",
+    "bootstrap": "^5.1.3",
+    "bootstrap-vue": "^2.21.2",
+    "core-js": "^3.6.5",
+    "sweetalert": "^2.1.2",
+    "vue": "^2.6.11",
+    "vue-add-events-to-google-calendar": "0.0.2",
+    "vue-google-login": "^2.0.5",
+    "vue-router": "^3.2.0",
+    "vuex": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "prettier": "^2.2.1",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "_id": "p2-iproject-client-1@1.0.0",
+  "bugs": {
+    "url": "https://github.com/Forgotosleep/p2-iproject-client-1/issues"
+  },
+  "homepage": "https://github.com/Forgotosleep/p2-iproject-client-1#readme",
+  "keywords": [],
+  "license": "ISC",
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Forgotosleep/p2-iproject-client-1.git"
+  }
+}
